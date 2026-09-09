@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIDA Ecosystem | اکوسیستم بین‌المللی فیدا</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- فونت اصلی: Estedad (وزن‌های ۴۰۰ تا ۸۰۰) با Vazirmatn به‌عنوان جایگزین امن -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Estedad';
+            font-style: normal;
+            font-display: swap;
+            font-weight: 400;
+            src: url(https://cdn.jsdelivr.net/fontsource/fonts/estedad@latest/arabic-400-normal.woff2) format('woff2');
+            unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+        }
+        @font-face {
+            font-family: 'Estedad';
+            font-style: normal;
+            font-display: swap;
+            font-weight: 500;
+            src: url(https://cdn.jsdelivr.net/fontsource/fonts/estedad@latest/arabic-500-normal.woff2) format('woff2');
+            unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+        }
+        @font-face {
+            font-family: 'Estedad';
+            font-style: normal;
+            font-display: swap;
+            font-weight: 600;
+            src: url(https://cdn.jsdelivr.net/fontsource/fonts/estedad@latest/arabic-600-normal.woff2) format('woff2');
+            unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+        }
+        @font-face {
+            font-family: 'Estedad';
+            font-style: normal;
+            font-display: swap;
+            font-weight: 700;
+            src: url(https://cdn.jsdelivr.net/fontsource/fonts/estedad@latest/arabic-700-normal.woff2) format('woff2');
+            unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+        }
+        @font-face {
+            font-family: 'Estedad';
+            font-style: normal;
+            font-display: swap;
+            font-weight: 800;
+            src: url(https://cdn.jsdelivr.net/fontsource/fonts/estedad@latest/arabic-800-normal.woff2) format('woff2');
+            unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F;
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Estedad', 'Vazirmatn', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            gold: '#D4AF37',
+                            goldLight: '#F5E7A3',
+                            dark: '#080C15',
+                            card: '#0F172A',
+                            border: '#1E293B',
+                            hover: '#1E293B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* ===== سیستم تایپوگرافی: Heading 700/800، Body 400/500، Button 500/600 ===== */
+        body { background-color: #060911; color: #E2E8F0; font-family: 'Estedad', 'Vazirmatn', sans-serif; font-weight: 400; }
+        h1, h2, h3, h4, h5, h6 { font-weight: 700; }
+        h1, h2 { font-weight: 800; }
+        button, a.btn, .fida-btn { font-weight: 600; }
+        .font-black { font-weight: 800 !important; }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FDE68A 0%, #D4AF37 50%, #B45309 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border { border: 1px solid rgba(212, 175, 55, 0.3); }
+        .glass-card {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(8, 12, 21, 0.95) 100%);
+            backdrop-filter: blur(12px);
+        }
+
+        /* ===================================================================
+           آیکون‌های سه‌بعدی — بج شیشه‌ای با نور و سایه‌ی داخلی برای حس حجم
+           =================================================================== */
+        .icon-3d {
+            position: relative;
+            box-shadow:
+                inset 0 1px 1px rgba(255,255,255,0.35),
+                inset 0 -6px 10px rgba(0,0,0,0.35),
+                0 8px 18px -6px rgba(0,0,0,0.55),
+                0 0 0 1px rgba(255,255,255,0.04);
+            transform: perspective(300px) rotateX(0deg);
+            transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+            overflow: hidden;
+        }
+        .icon-3d::before{
+            content:"";
+            position:absolute; inset:0;
+            background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.45), transparent 55%);
+            mix-blend-mode: overlay;
+            pointer-events:none;
+        }
+        .icon-3d::after{
+            content:"";
+            position:absolute; left:0; right:0; bottom:0; height:45%;
+            background: linear-gradient(to top, rgba(0,0,0,0.28), transparent);
+            pointer-events:none;
+        }
+        .icon-3d i, .icon-3d svg{
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.4)) drop-shadow(0 0 6px currentColor);
+            position: relative;
+            z-index: 1;
+        }
+        .group:hover .icon-3d{
+            transform: perspective(300px) rotateX(12deg) rotateZ(-4deg) scale(1.12);
+            box-shadow:
+                inset 0 1px 1px rgba(255,255,255,0.5),
+                inset 0 -6px 10px rgba(0,0,0,0.3),
+                0 14px 26px -8px rgba(0,0,0,0.65),
+                0 0 22px -4px currentColor;
+        }
+    </style>
+</head>
+<body class="min-h-screen selection:bg-brand-gold selection:text-black">
+
+    <!-- Top Navbar -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-brand-dark/85 border-b border-brand-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-full border border-brand-gold/60 flex items-center justify-center bg-brand-gold/10">
+                    <span class="font-black text-brand-gold text-lg tracking-wider">FIDA</span>
+                </div>
+                <div>
+                    <h1 class="text-sm sm:text-base font-bold text-white">اتاق مدیریت اقتصادی فیدا</h1>
+                    <p class="text-[10px] sm:text-xs text-brand-gold/80 font-mono">FIDA Smart Operations & Awards</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center gap-8 text-xs font-medium text-slate-300">
+                <a href="#barter-calculator" class="hover:text-brand-gold transition flex items-center gap-1.5">
+                    <i data-lucide="calculator" class="w-4 h-4 text-brand-gold"></i>
+                    ماشین‌حساب تهاتر دارایی‌ها
+                </a>
+                <a href="#awards-system" class="hover:text-brand-gold transition flex items-center gap-1.5">
+                    <i data-lucide="trophy" class="w-4 h-4 text-brand-gold"></i>
+                    جوایز دوازده‌گانه سال
+                </a>
+            </nav>
+            <div class="flex items-center gap-2">
+                <a href="index.html" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-brand-border text-slate-300 hover:border-brand-gold/50 hover:text-brand-gold transition text-xs">
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    بازگشت به صفحه اصلی
+                </a>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[11px] text-emerald-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    نسخه تعاملی سند معماری
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 1: BARTER CALCULATOR -->
+    <section id="barter-calculator" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-xs text-brand-gold mb-3">
+                <i data-lucide="scale" class="w-4 h-4"></i>
+                <span>پروتکل اتاق تهاتر دارایی‌های بزرگ (Large Asset Barter Room)</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black text-white">
+                شبیه‌ساز هوشمند ساختاردهی و <span class="gold-gradient-text">تسویه تهاتری</span>
+            </h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-3 leading-relaxed">
+                محاسبه ترکیب نقد/تهاتر، ضریب آمادگی معامله (Deal Readiness)، کارمزد موفقیت و سهم ارزش‌آفرینان بر اساس دکترین رسمی فیدا.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Form Controls -->
+            <div class="lg:col-span-7 glass-card p-6 sm:p-8 rounded-2xl border border-brand-border">
+                <h3 class="text-base font-bold text-white mb-6 flex items-center gap-2">
+                    <i data-lucide="sliders" class="w-5 h-5 text-brand-gold"></i>
+                    پارامترهای فنی و حقوقی پرونده
+                </h3>
+
+                <!-- Asset Type -->
+                <div class="mb-6">
+                    <label class="block text-xs font-semibold text-slate-300 mb-2">نوع دارایی یا ظرفیت ورودی</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button type="button" onclick="setAssetType('real_estate', this)" class="asset-btn active p-3 rounded-xl border border-brand-gold bg-brand-gold/10 text-xs font-bold text-brand-gold text-center transition">
+                            املاک و پروژه‌های ساختمانی
+                        </button>
+                        <button type="button" onclick="setAssetType('machinery', this)" class="asset-btn p-3 rounded-xl border border-slate-700 bg-slate-900/60 text-xs text-slate-300 text-center hover:border-slate-500 transition">
+                            ماشین‌آلات و خطوط تولید
+                        </button>
+                        <button type="button" onclick="setAssetType('materials', this)" class="asset-btn p-3 rounded-xl border border-slate-700 bg-slate-900/60 text-xs text-slate-300 text-center hover:border-slate-500 transition">
+                            مواد اولیه و کالای صنعتی
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Valuation Slider -->
+                <div class="mb-6">
+                    <div class="flex justify-between items-center text-xs mb-2">
+                        <span class="text-slate-300 font-semibold">ارزش کارشناسی دارایی (میلیارد تومان):</span>
+                        <span id="assetValDisplay" class="font-mono text-base font-bold text-brand-gold">50 میلیارد</span>
+                    </div>
+                    <input id="assetValInput" type="range" min="5" max="300" value="50" step="5" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500" oninput="calculateBarter()">
+                    <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-mono">
+                        <span>5 B</span>
+                        <span>150 B</span>
+                        <span>300 B</span>
+                    </div>
+                </div>
+
+                <!-- Cash vs Barter Ratio Slider -->
+                <div class="mb-6">
+                    <div class="flex justify-between items-center text-xs mb-2">
+                        <span class="text-slate-300 font-semibold">مدل ترکیبی (Hybrid Ratio) — سهم تهاتر کالا/ملک:</span>
+                        <span id="barterRatioDisplay" class="font-mono text-base font-bold text-emerald-400">70% تهاتر / 30% نقد</span>
+                    </div>
+                    <input id="barterRatioInput" type="range" min="20" max="100" value="70" step="5" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500" oninput="calculateBarter()">
+                    <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-mono">
+                        <span>20% تهاتر (بیشتر نقد)</span>
+                        <span>100% تهاتر خالص</span>
+                    </div>
+                </div>
+
+                <!-- Verification Level (V1-V4) -->
+                <div class="mb-6">
+                    <label class="block text-xs font-semibold text-slate-300 mb-2">سطح راستی‌آزمایی اسناد و اختیار معامله</label>
+                    <select id="verificationLevel" onchange="calculateBarter()" class="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 text-xs text-slate-200 focus:outline-none focus:border-brand-gold">
+                        <option value="0.6">سطح V1 (اظهارات اولیه و اسناد ناقص - ریسک بالا)</option>
+                        <option value="0.8">سطح V2 (دریافت مدارک کلیدی و احراز مالکیت نسبی)</option>
+                        <option value="0.95" selected>سطح V3 (بررسی موشکافانه کارشناسی، استعلام سند و عدم معارض)</option>
+                        <option value="1.0">سطح V4 (استاندارد جامع فیدا، قفل مالکیت و تضمینات امانی)</option>
+                    </select>
+                </div>
+
+                <!-- Success Fee Tier Selection -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-2">نوع خدمت ساختاردهی فیدا</label>
+                    <div class="grid grid-cols-2 gap-3 text-xs">
+                        <label class="flex items-center gap-2 p-3 rounded-xl bg-slate-900/60 border border-slate-700 cursor-pointer hover:border-slate-500">
+                            <input type="radio" name="feeTier" value="0.015" checked onchange="calculateBarter()" class="accent-brand-gold">
+                            <span>اتاق تطبیق و معرفی مستقیم (1.5%)</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 rounded-xl bg-slate-900/60 border border-slate-700 cursor-pointer hover:border-slate-500">
+                            <input type="radio" name="feeTier" value="0.03" onchange="calculateBarter()" class="accent-brand-gold">
+                            <span>ساختاردهی کامل، تیم مذاکره و تسویه امانی (3.0%)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output Dashboard -->
+            <div class="lg:col-span-5 flex flex-col justify-between glass-card p-6 sm:p-8 rounded-2xl border border-brand-gold/40 relative overflow-hidden">
+                <div class="absolute -top-24 -left-24 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div>
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                        <span class="text-xs font-mono text-brand-gold font-bold">FIDA-BARTER-SETTLEMENT</span>
+                        <span id="readinessBadge" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                            READY 76%
+                        </span>
+                    </div>
+
+                    <!-- Breakdown Table -->
+                    <div class="space-y-4 my-6 text-xs">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">بخش تهاتری ارزش (کالا / ظرفیت):</span>
+                            <span id="barterPartVal" class="font-mono font-bold text-white text-sm">35 میلیارد تومان</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">تعهد نقدی مورد نیاز (Cash Settle):</span>
+                            <span id="cashPartVal" class="font-mono font-bold text-amber-400 text-sm">15 میلیارد تومان</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">کارمزد موفقیت معامله (Success Fee):</span>
+                            <span id="successFeeVal" class="font-mono font-bold text-white text-sm">750 میلیون تومان</span>
+                        </div>
+                        <div class="pt-3 border-t border-slate-800 flex justify-between items-center">
+                            <span class="text-slate-400">سهم معرف و ثبت‌کننده نقش (Share Logic):</span>
+                            <span id="referrerShareVal" class="font-mono font-bold text-brand-gold text-sm">187.5 میلیون تومان</span>
+                        </div>
+                    </div>
+
+                    <!-- Visual Progress Bar -->
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 mb-6">
+                        <div class="flex justify-between text-[11px] text-slate-400 mb-2">
+                            <span>ترکیب تسویه پرونده</span>
+                            <span id="ratioVisualLabel" class="font-mono text-slate-300">70% تهاتر | 30% نقد</span>
+                        </div>
+                        <div class="h-3 w-full bg-slate-800 rounded-full overflow-hidden flex">
+                            <div id="barterProgressBar" class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-300" style="width: 70%;"></div>
+                            <div id="cashProgressBar" class="h-full bg-gradient-to-r from-amber-500 to-brand-gold transition-all duration-300" style="width: 30%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-800">
+                    <button class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-brand-gold text-slate-950 font-bold hover:shadow-lg hover:shadow-amber-500/20 transition flex items-center justify-center gap-2 text-xs">
+                        <i data-lucide="file-check" class="w-4 h-4"></i>
+                        ثبت پرونده در کارخانه تفاهم‌نامه به پروژه
+                    </button>
+                    <p class="text-[10px] text-slate-500 text-center mt-2">محاسبات فوق شبیه‌سازی فنی است و تعهد حقوقی نهایی منوط به بررسی کارشناسی اتاق تهاتر است.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: THE 12 ANNUAL AWARDS -->
+    <section id="awards-system" class="py-20 bg-slate-950/70 border-t border-brand-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-xs text-brand-gold mb-3">
+                    <i data-lucide="award" class="w-4 h-4"></i>
+                    <span>نظام تجلیل از اثرگذاری پایدار (FIDA 12 Annual Awards)</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-black text-white">
+                    جوایز دوازده‌گانه <span class="gold-gradient-text">بازی اقتصادی سالم</span>
+                </h2>
+                <p class="text-slate-400 text-xs sm:text-sm mt-3 leading-relaxed">
+                    «جوایز فیدا جایزه محبوبیت نیستند؛ جوایز مستند ارزش‌آفرینی واقعی، پایداری بنگاه‌ها و رفتار جوانمردانه اقتصادی هستند.»
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                
+                <!-- Award 1 -->
+                <div class="glass-card p-5 rounded-2xl border border-brand-border hover:border-brand-gold/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-brand-gold mb-4 group-hover:scale-110 transition icon-3d">
+                        <i data-lucide="crown" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-[10px] font-mono text-brand-gold font-bold">AWARD 01</span>
+                    <h4 class="text-base font-bold text-white mt-1 mb-2">قهرمان اقتصادی سال</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">بالاترین افتخار برای فرد یا مجموعه‌ای با بیشترین اثر مثبت در خلق ارزش، حفظ بنگاه و اشتغال پایدار.</p>
+                </div>
+
+                <!-- Award 2 -->
+                <div class="glass-card p-5 rounded-2xl border border-brand-border hover:border-brand-gold/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4 group-hover:scale-110 transition icon-3d">
+                        <i data-lucide="flame" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-[10px] font-mono text-emerald-400 font-bold">AWARD 02</span>
+                    <h4 class="text-base font-bold text-white mt-1 mb-2">آقای گل اقتصادی سال</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">برای عضوی که بیشترین تعداد نتایج معتبر اقتصادی (قرارداد قطعی، صادرات موفق یا جذب سرمایه) را محقق کرده است.</p>
+                </div>
+
+                <!-- Award 3 -->
+                <div class="glass-card p-5 rounded-2xl border border-brand-border hover:border-brand-gold/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-brand-gold mb-4 group-hover:scale-110 transition icon-3d">
+                        <i data-lucide="sparkle" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-[10px] font-mono text-brand-gold font-bold">AWARD 03</span>
+                    <h4 class="text-base font-bold text-white mt-1 mb-2">پاس طلایی سال</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">تقدیر از بازی‌ساز برتری که با دقیق‌ترین معرفی و اتصال مکمل، زمینه مستقیم تحقق یک گل بزرگ را فراهم ساخت.</p>
+                </div>
+
+                <!-- Award 4 -->
+                <div class="glass-card p-5 rounded-2xl border border-brand-border hover:border-brand-gold/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-4 group-hover:scale-110 transition icon-3d">
+                        <i data-lucide="file-signature" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-[10px] font-mono text-blue-400 font-bold">AWARD 04</span>
+                    <h4 class="text-base font-bold text-white mt-1 mb-2">قرارداد سال</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">مهم‌ترین پیمان تجاری سال از منظر ابعاد راهبردی، ورود به بازارهای جدید منطقه‌ای و تکرارپذیری الگو.</p>
+                </div>
+
+                <!-- Award 5 -->
+                <div class="glass-card p-5 rounded-2xl border border-brand-border hover:border-brand-gold/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4 group-hover:scale-110 transition icon-3d">
+                        <i data-lucide="lightbulb" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-[10px] font-mono text-purple-400 font-bold">AWARD 05</span>
+                    <h4 class="text-base font-bold text-white mt-1 mb-2">فرصت‌ساز سال</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">کشف ظرفیت‌های خفته، نیازهای بازارهای نوظهور و تبدیل یک ایده مبهم به یک پرونده آماده تصمیم.</p>
+                </div>
+
+                <!-- Award 6 -->
+                <div class="glass-card p-5 rounded-2xl border border-brand-border hover:border-brand-gold/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400 mb-4 group-hover:scale-110 transition icon-3d">
+                        <i data-lucide="layers" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-[10px] font-mono text-teal-400 font-bold">AWARD 06</span>
+                    <h4 class="text-base font-bold text-white mt-1 mb-2">پروژه سال</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">پیاده‌سازی موفق‌ترین پروژه ائتلافی با بالاترین استاندارد اجرا، هم‌افزایی تیمی و رضایت طرفین.</p>
+                </div>
+
+                <!-- Award 7 -->
+                <div class="glass-card p-5 rounded-2xl border border-brand-border hover:border-brand-gold/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400 mb-4 group-hover:scale-110 transition icon-3d">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-[10px] font-mono text-rose-400 font-bold">AWARD 07</span>
+                    <h4 class="text-base font-bold text-white mt-1 mb-2">پدیده سال (مدیران آینده)</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">استعداد جوان یا بنگاه نوظهوری که با تکیه بر دانش و چابکی، رشدی جهش‌یافته در شبکه به نمایش گذاشت.</p>
+                </div>
+
+                <!-- Award 8 -->
+                <div class="glass-card p-5 rounded-2xl border border-brand-border hover:border-brand-gold/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-amber-600/10 border border-amber-600/30 flex items-center justify-center text-amber-500 mb-4 group-hover:scale-110 transition icon-3d">
+                        <i data-lucide="rotate-ccw" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-[10px] font-mono text-amber-500 font-bold">AWARD 08</span>
+                    <h4 class="text-base font-bold text-white mt-1 mb-2">بازگشت طلایی سال</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">نماد تاب‌آوری اقتصادی؛ احیا و بازسازی یک کارخانه، بنگاه یا زنجیره تولید پس از بحران و توقف.</p>
+                </div>
+
+                <!-- Award 9 -->
+                <div class="glass-card p-5 rounded-2xl border border-brand-border hover:border-brand-gold/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-4 group-hover:scale-110 transition icon-3d">
+                        <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-[10px] font-mono text-indigo-400 font-bold">AWARD 09</span>
+                    <h4 class="text-base font-bold text-white mt-1 mb-2">سوپر تکل اقتصادی</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">اقدام حقوقی یا مدیریتی سریع و بهنگام در دقایق پایانی برای نجات یک قرارداد حساس و جلوگیری از زیان بزرگ.</p>
+                </div>
+
+                <!-- Award 10 -->
+                <div class="glass-card p-5 rounded-2xl border border-brand-border hover:border-brand-gold/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4 group-hover:scale-110 transition icon-3d">
+                        <i data-lucide="scale" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-[10px] font-mono text-emerald-400 font-bold">AWARD 10</span>
+                    <h4 class="text-base font-bold text-white mt-1 mb-2">بازی جوانمردانه (Fair Play)</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">رعایت بی‌قیدوشرط صداقت، عدم دور زدن معرف، حفظ محرمانگی و انصاف مالی حتی در شرایط پرریسک مذاکره.</p>
+                </div>
+
+                <!-- Award 11 -->
+                <div class="glass-card p-5 rounded-2xl border border-brand-border hover:border-brand-gold/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 mb-4 group-hover:scale-110 transition icon-3d">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-[10px] font-mono text-sky-400 font-bold">AWARD 11</span>
+                    <h4 class="text-base font-bold text-white mt-1 mb-2">تیم اقتصادی سال</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">هماهنگ‌ترین ترکیب نقش‌ها (کاپیتان، خبره حقوقی، صاحب فرصت و مذاکره‌کننده) در نهایی‌سازی پروژه.</p>
+                </div>
+
+                <!-- Award 12 -->
+                <div class="glass-card p-5 rounded-2xl border border-brand-border hover:border-brand-gold/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-brand-gold mb-4 group-hover:scale-110 transition icon-3d">
+                        <i data-lucide="medal" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-[10px] font-mono text-brand-gold font-bold">AWARD 12</span>
+                    <h4 class="text-base font-bold text-white mt-1 mb-2">نشان وفاداری و خدمت ماندگار</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">تجلیل از همراهان باسابقه گام اول فرانگران و پیشگامان گام دوم در تقویت مستمر سرمایه اجتماعی.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-black border-t border-brand-border text-center text-xs text-slate-500">
+        <p class="text-slate-400 font-bold mb-1">اکوسیستم بین‌المللی فیدا (FIDA) • نسخه شهریور ۱۴۰۵</p>
+        <p>ارتباطات راهبردی، سرمایه اجتماعی و بازی اقتصادی سالم</p>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        function setAssetType(type, element) {
+            document.querySelectorAll('.asset-btn').forEach(btn => {
+                btn.classList.remove('border-brand-gold', 'bg-brand-gold/10', 'text-brand-gold', 'font-bold');
+                btn.classList.add('border-slate-700', 'bg-slate-900/60', 'text-slate-300');
+            });
+            element.classList.remove('border-slate-700', 'bg-slate-900/60', 'text-slate-300');
+            element.classList.add('border-brand-gold', 'bg-brand-gold/10', 'text-brand-gold', 'font-bold');
+            calculateBarter();
+        }
+
+        function calculateBarter() {
+            const val = parseFloat(document.getElementById('assetValInput').value);
+            const barterRatio = parseFloat(document.getElementById('barterRatioInput').value);
+            const vMultiplier = parseFloat(document.getElementById('verificationLevel').value);
+            const feeRate = parseFloat(document.querySelector('input[name="feeTier"]:checked').value);
+
+            // UI Label updates
+            document.getElementById('assetValDisplay').innerText = val + ' میلیارد تومان';
+            document.getElementById('barterRatioDisplay').innerText = barterRatio + '% تهاتر / ' + (100 - barterRatio) + '% نقد';
+            document.getElementById('ratioVisualLabel').innerText = barterRatio + '% تهاتر | ' + (100 - barterRatio) + '% نقد';
+
+            // Calculations
+            const barterPart = (val * (barterRatio / 100)).toFixed(1);
+            const cashPart = (val * ((100 - barterRatio) / 100)).toFixed(1);
+            
+            const totalFeeMillion = (val * 1000 * feeRate).toFixed(1);
+            const referrerShareMillion = (totalFeeMillion * 0.25).toFixed(1); // 25% share of value
+
+            // Readiness Score calculation
+            const baseReadiness = (barterRatio > 80 ? 70 : 85);
+            const calculatedReadiness = Math.round(baseReadiness * vMultiplier);
+
+            // Render Output
+            document.getElementById('barterPartVal').innerText = barterPart + ' میلیارد تومان';
+            document.getElementById('cashPartVal').innerText = cashPart + ' میلیارد تومان';
+            document.getElementById('successFeeVal').innerText = totalFeeMillion + ' میلیون تومان';
+            document.getElementById('referrerShareVal').innerText = referrerShareMillion + ' میلیون تومان';
+
+            document.getElementById('barterProgressBar').style.width = barterRatio + '%';
+            document.getElementById('cashProgressBar').style.width = (100 - barterRatio) + '%';
+
+            const badge = document.getElementById('readinessBadge');
+            badge.innerText = 'READY ' + calculatedReadiness + '%';
+            if (calculatedReadiness >= 75) {
+                badge.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30';
+            } else {
+                badge.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/15 text-amber-400 border border-amber-500/30';
+            }
+        }
+
+        // Initialize icons and calculator
+        lucide.createIcons();
+        calculateBarter();
+    </script>
+</body>
+</html>
