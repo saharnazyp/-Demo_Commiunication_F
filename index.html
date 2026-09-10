@@ -191,6 +191,26 @@
         .fida-composer input:focus{ border-color:#D4AF37; }
         .fida-composer button{ width:40px; height:40px; border-radius:50%; background:transparent; border:1px solid #D4AF37; color:#F5E7A3; font-size:15px; cursor:pointer; flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:all .25s; }
         .fida-composer button:hover{ background:#D4AF37; color:#0B0F19; }
+
+        /* ===================================================================
+           موشن و افکت‌های سه‌بعدی اضافه — Scroll Reveal + Tilt Card
+           =================================================================== */
+        .reveal{
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
+        }
+        .reveal.in-view{ opacity: 1; transform: translateY(0); }
+
+        .tilt-card{
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform .15s ease-out, box-shadow .3s ease;
+        }
+        .tilt-card:hover{
+            box-shadow: 0 25px 50px -12px rgba(212,175,55,0.15), 0 0 0 1px rgba(212,175,55,0.15);
+        }
+        .tilt-card > *{ transform: translateZ(20px); }
     </style>
 </head>
 <body class="min-h-screen selection:bg-brand-gold selection:text-black">
@@ -205,6 +225,7 @@
                 <div>
                     <h1 class="text-lg font-bold text-white leading-none">ائتلاف بین‌المللی توسعه فرانگران</h1>
                     <p class="text-xs text-brand-gold mt-1 font-mono">Faranegharan Int'l Development Alliance</p>
+                    <p class="text-[11px] text-slate-500 mt-1 hidden sm:block">جایی که نیاز، ظرفیت و فرصت اعضا با هوش مصنوعی به هم می‌رسند</p>
                 </div>
             </div>
             <nav class="hidden md:flex items-center gap-8 text-sm text-slate-300">
@@ -232,6 +253,7 @@
 
     <!-- Hero Section -->
     <section class="relative pt-20 pb-28 overflow-hidden">
+        <canvas id="heroNetwork" class="absolute inset-0 w-full h-full opacity-60" style="pointer-events:none;"></canvas>
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent"></div>
         <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-card gold-border text-xs text-brand-gold mb-8">
@@ -265,7 +287,7 @@
                 <i data-lucide="brain-circuit" class="w-4 h-4"></i>
                 <span>قلب هوش مصنوعی فیدا — موتور تطبیق زنده</span>
             </div>
-            <h3 class="text-2xl sm:text-3xl font-bold text-white mt-1">فیدامچ: دستیاری که فرصت درست را برایتان پیدا می‌کند</h3>
+            <h3 class="reveal text-2xl sm:text-3xl font-bold text-white mt-1">فیدامچ: دستیاری که فرصت درست را برایتان پیدا می‌کند</h3>
             <p class="text-slate-400 text-sm mt-3 leading-relaxed">کافی‌ست بگویید دنبال چه کسی، چه ظرفیتی یا چه فرصتی هستید. فیدامچ در میان پرونده‌های اعضا جست‌وجو می‌کند و در چند ثانیه، بهترین تطبیق‌ها را با درصد اطمینان نشان می‌دهد.</p>
         </div>
 
@@ -344,7 +366,7 @@
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
             <div>
                 <span class="text-xs font-bold tracking-widest text-brand-gold uppercase">FIDA Radar & Snapshot</span>
-                <h3 class="text-2xl sm:text-3xl font-bold text-white mt-1">پرونده‌های زنده و کارت‌های فرصت اقتصادی</h3>
+                <h3 class="reveal text-2xl sm:text-3xl font-bold text-white mt-1">پرونده‌های زنده و کارت‌های فرصت اقتصادی</h3>
             </div>
             <p class="text-xs text-slate-400 max-w-md mt-2 md:mt-0">
                 سطوح شفافیت مسئولانه: کلیات فرصت نمایش داده می‌شود اما مشخصات طرفین تحت سپر داده (Data Shield) و دسترسی کنترل‌شده است.
@@ -353,7 +375,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Opportunity Card 1 -->
-            <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition">
+            <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition tilt-card">
                 <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
                     <span class="font-mono text-brand-gold font-bold">FIDA-EXP-0047</span>
                     <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">ACTIVE</span>
@@ -386,7 +408,7 @@
             </div>
 
             <!-- Opportunity Card 2 -->
-            <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition">
+            <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition tilt-card">
                 <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
                     <span class="font-mono text-brand-gold font-bold">FIDA-BAR-0112</span>
                     <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 font-mono">IN MATCHING</span>
@@ -418,7 +440,7 @@
             </div>
 
             <!-- Opportunity Card 3 -->
-            <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition">
+            <div class="bg-brand-card p-6 rounded-2xl border border-brand-border hover:border-brand-gold/50 transition tilt-card">
                 <div class="flex items-center justify-between text-xs text-slate-400 mb-3">
                     <span class="font-mono text-brand-gold font-bold">FIDA-INV-0089</span>
                     <span class="px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20 font-mono">STRUCTURING</span>
@@ -456,7 +478,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-12">
                 <span class="text-xs font-bold tracking-widest text-brand-gold uppercase">FIDA Trust Engine</span>
-                <h3 class="text-2xl sm:text-3xl font-bold text-white mt-1">نظام کارتهای اعتماد و صیانت شبکه</h3>
+                <h3 class="reveal text-2xl sm:text-3xl font-bold text-white mt-1">نظام کارتهای اعتماد و صیانت شبکه</h3>
                 <p class="text-slate-400 text-sm mt-3">«اعتماد خریدنی نیست، در طول زمان و بر پایه رفتار ساخته می‌شود.»</p>
             </div>
 
@@ -509,7 +531,7 @@
     <section id="confederations" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-14">
             <span class="text-xs font-bold tracking-widest text-brand-gold uppercase">Specialized Confederations</span>
-            <h3 class="text-2xl sm:text-3xl font-bold text-white mt-1">هفده کنفدراسیون تخصصی فیدا</h3>
+            <h3 class="reveal text-2xl sm:text-3xl font-bold text-white mt-1">هفده کنفدراسیون تخصصی فیدا</h3>
             <p class="text-slate-400 text-sm mt-3">چترهای راهبردی تخصصی برای مدیریت نیازها، پروژه‌ها و شبکه‌سازی ملی و بین‌المللی</p>
         </div>
 
@@ -582,6 +604,116 @@
 
     <script>
         lucide.createIcons();
+
+        // ============================================================
+        // شبکه هوش مصنوعی متحرک در پس‌زمینه Hero (canvas سبک، بدون کتابخانه)
+        // ============================================================
+        (function heroNetworkAnim(){
+            const canvas = document.getElementById('heroNetwork');
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let w, h, nodes;
+            const NODE_COUNT = 46;
+            const MAX_DIST = 140;
+
+            function resize(){
+                const rect = canvas.parentElement.getBoundingClientRect();
+                w = canvas.width = rect.width;
+                h = canvas.height = rect.height;
+            }
+            function initNodes(){
+                nodes = Array.from({length: NODE_COUNT}, () => ({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.25,
+                    vy: (Math.random() - 0.5) * 0.25,
+                    r: Math.random() * 1.6 + 0.6
+                }));
+            }
+            function step(){
+                ctx.clearRect(0, 0, w, h);
+                nodes.forEach(n => {
+                    n.x += n.vx; n.y += n.vy;
+                    if(n.x < 0 || n.x > w) n.vx *= -1;
+                    if(n.y < 0 || n.y > h) n.vy *= -1;
+                });
+                for(let i = 0; i < nodes.length; i++){
+                    for(let j = i + 1; j < nodes.length; j++){
+                        const a = nodes[i], b = nodes[j];
+                        const dx = a.x - b.x, dy = a.y - b.y;
+                        const dist = Math.sqrt(dx*dx + dy*dy);
+                        if(dist < MAX_DIST){
+                            ctx.strokeStyle = `rgba(212,175,55,${(1 - dist / MAX_DIST) * 0.35})`;
+                            ctx.lineWidth = 0.6;
+                            ctx.beginPath();
+                            ctx.moveTo(a.x, a.y);
+                            ctx.lineTo(b.x, b.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                nodes.forEach(n => {
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(245,231,163,0.55)';
+                    ctx.fill();
+                });
+                requestAnimationFrame(step);
+            }
+            resize();
+            initNodes();
+            step();
+            window.addEventListener('resize', () => { resize(); initNodes(); });
+        })();
+
+        // ============================================================
+        // Scroll Reveal — عناصر با کلاس reveal هنگام ورود به دید، محو-بالا می‌آیند
+        // ============================================================
+        (function scrollReveal(){
+            const els = document.querySelectorAll('.reveal');
+            if(!els.length) return;
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting){
+                        entry.target.classList.add('in-view');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            els.forEach(el => io.observe(el));
+        })();
+
+        // ============================================================
+        // Tilt Card — چرخش سه‌بعدی کارت‌ها بر اساس موقعیت ماوس
+        // ============================================================
+        (function tiltCards(){
+            function attach(card){
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const px = (e.clientX - rect.left) / rect.width - 0.5;
+                    const py = (e.clientY - rect.top) / rect.height - 0.5;
+                    card.style.transform = `perspective(900px) rotateY(${px * 10}deg) rotateX(${-py * 10}deg) translateZ(0)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg)';
+                });
+            }
+            document.querySelectorAll('.tilt-card').forEach(attach);
+            // کارت‌های نتیجه فیدامچ به‌صورت پویا ساخته می‌شوند؛ با MutationObserver هم پوشش می‌دهیم
+            const chatEl = document.getElementById('fidaChat');
+            if(chatEl){
+                new MutationObserver((mutations) => {
+                    mutations.forEach(m => m.addedNodes.forEach(node => {
+                        if(node.nodeType === 1){
+                            node.querySelectorAll?.('.fida-result-card').forEach(card => {
+                                card.classList.add('tilt-card');
+                                attach(card);
+                            });
+                        }
+                    }));
+                }).observe(chatEl, { childList: true, subtree: true });
+            }
+        })();
 
         // ============================================================
         // FIDAMATCH — همان قرارداد backend مخزن (Worker LLM Router)
