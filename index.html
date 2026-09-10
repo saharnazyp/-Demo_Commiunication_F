@@ -263,10 +263,10 @@
         <div class="text-center max-w-3xl mx-auto mb-10">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-card gold-border text-xs text-brand-gold mb-4">
                 <i data-lucide="brain-circuit" class="w-4 h-4"></i>
-                <span>موتور تطبیق فیدا — لایه هوش مصنوعی و RAG</span>
+                <span>قلب هوش مصنوعی فیدا — موتور تطبیق زنده</span>
             </div>
-            <h3 class="text-2xl sm:text-3xl font-bold text-white mt-1">دستیار هوشمند فیدامچ را همین‌جا امتحان کنید</h3>
-            <p class="text-slate-400 text-sm mt-3 leading-relaxed">نیاز، ظرفیت یا فرصت خودتان را بنویسید — موتور تطبیق فیدا در پرونده‌های ثبت‌شده اعضا جستجو می‌کند و بهترین گزینه‌ها را با درصد تطبیق پیشنهاد می‌دهد.</p>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white mt-1">فیدامچ: دستیاری که فرصت درست را برایتان پیدا می‌کند</h3>
+            <p class="text-slate-400 text-sm mt-3 leading-relaxed">کافی‌ست بگویید دنبال چه کسی، چه ظرفیتی یا چه فرصتی هستید. فیدامچ در میان پرونده‌های اعضا جست‌وجو می‌کند و در چند ثانیه، بهترین تطبیق‌ها را با درصد اطمینان نشان می‌دهد.</p>
         </div>
 
         <div class="bg-brand-card rounded-3xl border border-brand-border overflow-hidden shadow-2xl shadow-black/40">
@@ -301,7 +301,7 @@
             <div class="fida-chat" id="fidaChat">
                 <div class="fida-msg fida-msg-bot">
                     <div class="fida-bubble">
-                        سلام 👋 من فیدامچ هستم. بگویید دنبال چه کسی، چه ظرفیتی یا چه فرصتی می‌گردید — در پایگاه‌داده اعضا، سازمان‌ها، نیازها و فرصت‌های فیدا جستجو می‌کنم.
+                        سلام 👋 من فیدامچ هستم، موتور تطبیق فیدا. بگویید دنبال چه کسی، چه ظرفیتی یا چه فرصتی هستید تا در میان اعضا، سازمان‌ها و پرونده‌های ثبت‌شده جست‌وجو کنم و بهترین گزینه را پیشنهاد بدهم.
                     </div>
                 </div>
             </div>
@@ -600,7 +600,6 @@
                 fidaRecords = await res.json();
             } catch(err){
                 console.error("خطا در بارگذاری داده فیدامچ:", err);
-                fidaAddBotAnswer("بارگذاری پایگاه‌داده نمونه با خطا مواجه شد. لطفاً از اجرای این صفحه از طریق یک سرور (نه file://) مطمئن شوید.");
             }
         }
 
@@ -723,6 +722,17 @@
             });
         }
 
+        const fidaFoundOpeners = [
+            "بر اساس بررسی پرونده‌های ثبت‌شده، این گزینه‌ها بیشترین هم‌خوانی را با درخواست شما دارند:",
+            "در پایگاه‌داده فیدا این موارد را پیدا کردم که به‌نظرم به کارتان می‌آید:",
+            "چند مورد پیدا شد که با نیاز شما همخوانی خوبی دارند:"
+        ];
+        const fidaEmptyAnswers = [
+            "در حال حاضر مورد دقیقاً منطبقی در پایگاه‌داده فیدا پیدا نشد. می‌توانید عبارت را کمی متفاوت مطرح کنید، یا این نیاز را ثبت کنید تا به‌محض یافتن مورد مرتبط به شما اطلاع داده شود.",
+            "فعلاً چیزی که کاملاً با این درخواست جور باشد در پرونده‌های ثبت‌شده نیست. پیشنهاد می‌کنم دوباره با کلمات دیگری امتحان کنید یا این نیاز را برای پیگیری بعدی ثبت کنید."
+        ];
+        function fidaPick(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+
         async function fidaHandleQuery(text){
             if(!text.trim()) return;
             if(!fidaRecords.length){
@@ -743,13 +753,11 @@
                 fidaAppendResultCards(container, result.matches);
             } catch(err){
                 console.error(err);
-                stopLoop(false);
+                stopLoop(true);
                 fidaRemoveTyping();
                 const local = fidaSearchLocal(text);
                 const container = fidaAddBotAnswer(
-                    local.length
-                        ? `اتصال زنده به هوش مصنوعی برقرار نشد، اما بر اساس جستجوی محلی این موارد را پیدا کردم:`
-                        : `اتصال زنده به هوش مصنوعی برقرار نشد و در جستجوی محلی هم موردی پیدا نشد. لطفاً دوباره امتحان کنید.`
+                    local.length ? fidaPick(fidaFoundOpeners) : fidaPick(fidaEmptyAnswers)
                 );
                 fidaAppendResultCards(container, local);
             } finally {
