@@ -221,6 +221,20 @@
 </head>
 <body class="min-h-screen selection:bg-brand-gold selection:text-black">
 
+    <!-- Demo Notice Banner -->
+    <div id="demoNotice" class="relative z-50 bg-gradient-to-l from-amber-500/15 via-brand-gold/10 to-amber-500/15 border-b border-brand-gold/25">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-center gap-3 text-center">
+            <i data-lucide="info" class="w-4 h-4 text-brand-gold flex-shrink-0"></i>
+            <p class="text-[11px] sm:text-xs text-slate-300 leading-relaxed">
+                <span class="font-bold text-brand-gold">این صفحه یک دمو مفهومی است</span>
+                — برای نمایش دید کلی از چشم‌انداز و معماری فیدا طراحی شده، خروجی نهایی محصول نیست و فعلاً به پایگاه‌داده یا هوش مصنوعی واقعی متصل نمی‌باشد.
+            </p>
+            <button id="demoNoticeClose" class="flex-shrink-0 w-5 h-5 rounded-full hover:bg-brand-gold/15 flex items-center justify-center transition" aria-label="بستن">
+                <i data-lucide="x" class="w-3.5 h-3.5 text-slate-400"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- Header / Navbar -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-brand-dark/80 border-b border-brand-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -313,7 +327,7 @@
         <div class="text-center max-w-3xl mx-auto mb-10">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-card gold-border text-xs text-brand-gold mb-4">
                 <i data-lucide="brain-circuit" class="w-4 h-4"></i>
-                <span>قلب هوش مصنوعی فیدا — موتور تطبیق زنده</span>
+                <span>پیش‌نمایش مفهومی موتور تطبیق فیدا</span>
             </div>
             <h3 class="reveal text-2xl sm:text-3xl font-bold text-white mt-1">فیدامچ: دستیاری که فرصت درست را برایتان پیدا می‌کند</h3>
             <p class="text-slate-400 text-sm mt-3 leading-relaxed">کافی‌ست بگویید دنبال چه کسی، چه ظرفیتی یا چه فرصتی هستید. فیدامچ در میان پرونده‌های اعضا جست‌وجو می‌کند و در چند ثانیه، بهترین تطبیق‌ها را با درصد اطمینان نشان می‌دهد.</p>
@@ -366,7 +380,7 @@
                 <input id="fidaInput" type="text" placeholder="پیام خود را بنویسید…" autocomplete="off">
                 <button type="submit" aria-label="ارسال">➤</button>
             </form>
-            <div class="text-center text-[10px] text-slate-500 pb-5">دمو محصول · تحلیل سؤال به‌صورت زنده توسط هوش مصنوعی انجام می‌شود · داده‌ها نمونه‌اند</div>
+            <div class="text-center text-[10px] text-slate-500 pb-5">نمونه مفهومی · پاسخ‌ها برای نمایش سناریوی محصول طراحی شده‌اند</div>
         </div>
     </section>
     <section class="py-8 bg-brand-card/50 border-y border-brand-border">
@@ -655,6 +669,14 @@
 
     <script>
         lucide.createIcons();
+
+        // بستن نوار اعلان دمو
+        (function demoNotice(){
+            const banner = document.getElementById('demoNotice');
+            const closeBtn = document.getElementById('demoNoticeClose');
+            if(!banner || !closeBtn) return;
+            closeBtn.addEventListener('click', () => banner.remove());
+        })();
 
         // ============================================================
         // منوی موبایل — نمایش/پنهان‌کردن با دکمه همبرگری
