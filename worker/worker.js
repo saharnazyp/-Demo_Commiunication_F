@@ -185,10 +185,9 @@ function parseModelJson(text) {
 
 function corsHeaders() {
   return {
-    // فقط درخواست‌هایی که از صفحه GitHub Pages شما می‌آیند مجاز هستند.
-    // اگر نام ریپازیتوری یا نام کاربری GitHub را عوض کردید، این مقدار را
-    // هم به‌روز کنید — وگرنه فرانت‌اند با خطای CORS مواجه می‌شود.
-    "Access-Control-Allow-Origin": "https://saharnazyp.github.io",
+    // باز برای همه دامنه‌ها — چون قرار است از چند جا (گیت‌هاب، تست محلی، دامنه‌های مختلف) قابل استفاده باشد.
+    // اگر بعداً خواستید امنیت را بالاتر ببرید، این را به دامنه(های) دقیق خودتان محدود کنید.
+    "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
     "Access-Control-Allow-Headers": "Content-Type, X-App-Secret",
   };
