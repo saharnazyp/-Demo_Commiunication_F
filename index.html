@@ -250,10 +250,32 @@
                     <i data-lucide="trophy" class="w-3.5 h-3.5"></i>
                     ماشین‌حساب تهاتر و جوایز
                 </a>
-                <button class="px-4 py-2 text-xs font-semibold text-brand-gold border border-brand-gold/50 rounded-lg hover:bg-brand-gold/10 transition">
+                <button class="hidden sm:inline-flex px-4 py-2 text-xs font-semibold text-brand-gold border border-brand-gold/50 rounded-lg hover:bg-brand-gold/10 transition">
                     ورود به پورتال
                 </button>
+                <button id="mobileMenuBtn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg border border-brand-border text-slate-300 hover:border-brand-gold/50 hover:text-brand-gold transition">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
             </div>
+        </div>
+
+        <!-- Mobile menu panel -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-brand-border bg-brand-dark/95 backdrop-blur-md">
+            <nav class="flex flex-col px-4 py-4 gap-1 text-sm text-slate-300">
+                <a href="#about" class="py-2.5 px-2 rounded-lg hover:bg-brand-card hover:text-brand-gold transition">درباره فیدا</a>
+                <a href="#fidamatch" class="py-2.5 px-2 rounded-lg hover:bg-brand-card hover:text-brand-gold transition flex items-center gap-2">
+                    <i data-lucide="radar" class="w-4 h-4 text-brand-gold"></i>
+                    فیدامچ
+                </a>
+                <a href="#pipeline" class="py-2.5 px-2 rounded-lg hover:bg-brand-card hover:text-brand-gold transition">فرآیند FIDANAV</a>
+                <a href="#confederations" class="py-2.5 px-2 rounded-lg hover:bg-brand-card hover:text-brand-gold transition">۱۷ کنفدراسیون</a>
+                <a href="#radar" class="py-2.5 px-2 rounded-lg hover:bg-brand-card hover:text-brand-gold transition">رادار فرصت‌ها</a>
+                <a href="#trust" class="py-2.5 px-2 rounded-lg hover:bg-brand-card hover:text-brand-gold transition">موتور اعتماد</a>
+                <a href="awards.html" class="py-2.5 px-2 rounded-lg hover:bg-brand-card hover:text-brand-gold transition flex items-center gap-2">
+                    <i data-lucide="trophy" class="w-4 h-4"></i>
+                    ماشین‌حساب تهاتر و جوایز
+                </a>
+            </nav>
         </div>
     </header>
 
@@ -633,6 +655,21 @@
 
     <script>
         lucide.createIcons();
+
+        // ============================================================
+        // منوی موبایل — نمایش/پنهان‌کردن با دکمه همبرگری
+        // ============================================================
+        (function mobileMenu(){
+            const btn = document.getElementById('mobileMenuBtn');
+            const menu = document.getElementById('mobileMenu');
+            if(!btn || !menu) return;
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+            menu.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => menu.classList.add('hidden'));
+            });
+        })();
 
         // ============================================================
         // شبکه هوش مصنوعی متحرک در پس‌زمینه Hero (canvas سبک، بدون کتابخانه)
